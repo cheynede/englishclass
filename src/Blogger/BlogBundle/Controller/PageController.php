@@ -4,8 +4,10 @@
 namespace Blogger\BlogBundle\Controller;
 
 use Blogger\BlogBundle\Entity\Enquiry;
+use Blogger\BlogBundle\Form\EnquiryType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
@@ -17,22 +19,21 @@ class PageController extends Controller
     {
         return $this->render('BloggerBlogBundle:Page:about.html.twig');
     }
-    public function contactAction()
+    public function contactAction(Request $request)
     {
         $oEnquiry = new Enquiry();
-        $form = $this->createForm(new EntityType(), $oEnquiry);
-        $request = $this->getRequest();
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
 
-            if ($form->isValid()) {
-                // Perform some action, such as sending an email
+        $form = $this->createForm(new EnquiryType(), $oEnquiry);
 
-                // Redirect - This is important to prevent users re-posting
-                // the form if they refresh the page
-                return $this->redirect($this->generateUrl('BloggerBlogBundle_contact'));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // Perform some action, such as sending an email
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($oEnquiry);
+            $em->flush();
+            return $this->redirect($this->generateUrl('BloggerBlogBundle_contact'));
             }
-        }
 
         return $this->render('BloggerBlogBundle:Page:contact.html.twig', array(
             'form' => $form->createView()
