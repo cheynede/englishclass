@@ -5,8 +5,48 @@
 
 {% block body %}
     <header>
-        <h1>Contact symblog</h1>
+        <h1>Contact EnglishClass</h1>
     </header>
 
-    <p>Want to contact symblog?</p>
+    <p>Want to contact EnglishClass?</p>
+    {#<form action="{{ path('BloggerBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blogger"  name="sentMessage" id="contactForm">#}
+        {#{{ form_errors(form) }}#}
+        {#{{ form_row(form.name) }}#}
+        {#{{ form_row(form.email) }}#}
+        {#{{ form_row(form.subject) }}#}
+        {#{{ form_row(form.body) }}#}
+        {#{{ form_rest(form) }}#}
+
+        {#<input type="submit" value="Submit" />#}
+    {#</form>#}
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form action="{{ path('BloggerBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blogger"  name="sentMessage" id="contactForm" novalidate>
+            {{ form_errors(form) }}
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ form_row(form.name) }}
+                </div>
+            </div>
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ form_row(form.email) }}
+                </div>
+            </div>
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ form_row(form.subject) }}
+                </div>
+            </div>
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ form_row(form.body) }}
+                </div>
+            </div>
+            {{ form_rest(form) }}
+
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
 {% endblock %}

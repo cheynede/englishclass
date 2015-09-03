@@ -29,11 +29,11 @@ class PageController extends Controller
 
         if ($form->isValid()) {
             // Perform some action, such as sending an email
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($oEnquiry);
-            $em->flush();
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($oEnquiry);
+//            $em->flush();
             return $this->redirect($this->generateUrl('BloggerBlogBundle_contact'));
-            }
+        }
 
         return $this->render('BloggerBlogBundle:Page:contact.html.twig', array(
             'form' => $form->createView()

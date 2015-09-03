@@ -3,6 +3,7 @@
 namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Enquiry
@@ -23,28 +24,28 @@ class Enquiry
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Obligatoire")
      * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
      * @var string
-     *
+     * @Assert\Email(checkMX = true,message="EnglishClass does not like invalid emails. Give me a real one!")
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
 
     /**
      * @var string
-     *
+     * @Assert\Length(max=50)
      * @ORM\Column(name="subject", type="string", length=255)
      */
     private $subject;
 
     /**
      * @var string
-     *
+     * @Assert\Length(max=100)
      * @ORM\Column(name="body", type="text")
      */
     private $body;
@@ -151,4 +152,15 @@ class Enquiry
     {
         return $this->body;
     }
+
+//    public static function loadValidatorMetadata(ClassMetadata $metadata)
+//    {
+//        $metadata->addPropertyConstraint('name', new NotBlank());
+//        $metadata->addPropertyConstraint('email', new Email(array(
+//            'message' => 'EnglishClass does not like invalid emails. Give me a real one!'
+//        )));
+//        $metadata->addPropertyConstraint('subject', new NotBlank());
+//        $metadata->addPropertyConstraint('subject', new MaxLength(50));
+//        $metadata->addPropertyConstraint('body', new MinLength(50));
+//    }
 }
