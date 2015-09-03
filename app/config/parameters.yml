@@ -9,5 +9,6 @@ parameters:
     mailer_encryption: ssl
     mailer_auth_mode: login
     mailer_host: smtp.gmail.com
-
+    mailer_user:
+    mailer_password:
     secret: 0a716b9867fd5051d5b57794052595334c00d9ce

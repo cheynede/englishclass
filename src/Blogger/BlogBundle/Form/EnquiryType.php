@@ -19,6 +19,7 @@ class EnquiryType extends AbstractType
             ->add('email', 'email')
             ->add('subject')
             ->add('body', 'textarea')
+            ->add('Valider', 'submit')
         ;
     }
     

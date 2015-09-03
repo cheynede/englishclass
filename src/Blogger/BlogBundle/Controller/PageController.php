@@ -28,6 +28,17 @@ class PageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Contact enquiry from EnglishClass')
+                ->setFrom('cheynede@gmail.com') # ADRESSE MAIL DU SITE
+                ->setTo($this->container->getParameter('blogger_blog.emails.contact_email'))
+                ->setBody($this->renderView('BloggerBlogBundle:Page:contactEmail.txt.twig', array('enquiry' => $oEnquiry)));
+            $this->get('mailer')->send($message);
+
+            $request->getSession()->getFlashBag()->add('notice','Your contact enquiry was successfully sent. Thank you!');
+
+
+
             // Perform some action, such as sending an email
 //            $em = $this->getDoctrine()->getManager();
 //            $em->persist($oEnquiry);

@@ -7,45 +7,40 @@
     <header>
         <h1>Contact EnglishClass</h1>
     </header>
+    {% for message in app.session.flashbag.get('notice') %}
+        <div class="blogger-notice">
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
 
     <p>Want to contact EnglishClass?</p>
-    {#<form action="{{ path('BloggerBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blogger"  name="sentMessage" id="contactForm">#}
-        {#{{ form_errors(form) }}#}
-        {#{{ form_row(form.name) }}#}
-        {#{{ form_row(form.email) }}#}
-        {#{{ form_row(form.subject) }}#}
-        {#{{ form_row(form.body) }}#}
-        {#{{ form_rest(form) }}#}
-
-        {#<input type="submit" value="Submit" />#}
-    {#</form>#}
 
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <form action="{{ path('BloggerBlogBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blogger"  name="sentMessage" id="contactForm" novalidate>
             {{ form_errors(form) }}
             <div class="row control-group">
                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                    {{ form_row(form.name) }}
+                    {{ form_row(form.name, {'class': 'form-control', 'attr': {'placeholder':'Name'} }) }}
                 </div>
             </div>
             <div class="row control-group">
                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                    {{ form_row(form.email) }}
+                    {{ form_row(form.email, {'class': 'form-control', 'attr': {'placeholder':'Email Adress'} } ) }}
                 </div>
             </div>
             <div class="row control-group">
                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                    {{ form_row(form.subject) }}
+                    {{ form_row(form.subject, {'class': 'form-control', 'attr': {'placeholder':'Subject'} } ) }}
                 </div>
             </div>
             <div class="row control-group">
                 <div class="form-group col-xs-12 floating-label-form-group controls">
-                    {{ form_row(form.body) }}
+                    {{ form_row(form.body, {'class': 'form-control', 'attr': {'placeholder':'Body'} } ) }}
                 </div>
             </div>
             {{ form_rest(form) }}
 
-            <input type="submit" value="Submit" />
+            {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-primary'}}) }}
         </form>
     </div>
 
