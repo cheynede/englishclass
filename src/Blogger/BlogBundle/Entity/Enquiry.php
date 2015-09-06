@@ -5,49 +5,18 @@ namespace Blogger\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Enquiry
- *
- * @ORM\Table()
- * @ORM\Entity
- */
+
 class Enquiry
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+
     private $id;
 
-    /**
-     * @var string
-     * @Assert\NotBlank(message="Obligatoire")
-     * @ORM\Column(name="name", type="string", length=50)
-     */
     private $name;
 
-    /**
-     * @var string
-     * @Assert\Email(checkMX = true,message="EnglishClass does not like invalid emails. Give me a real one!")
-     * @ORM\Column(name="email", type="string", length=255)
-     */
     private $email;
 
-    /**
-     * @var string
-     * @Assert\Length(max=50)
-     * @ORM\Column(name="subject", type="string", length=255)
-     */
     private $subject;
 
-    /**
-     * @var string
-     * @Assert\Length(max=100)
-     * @ORM\Column(name="body", type="text")
-     */
     private $body;
 
 
