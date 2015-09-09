@@ -4,7 +4,7 @@ parameters:
     database_port: null
     database_name: blogec
     database_user: blog
-    database_password: pitpit
+    database_password: null
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
     mailer_user: null

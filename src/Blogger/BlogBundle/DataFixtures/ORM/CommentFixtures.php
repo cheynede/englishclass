@@ -5,12 +5,13 @@ namespace Blogger\BlogBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Blogger\BlogBundle\Entity\Comment;
 use Blogger\BlogBundle\Entity\Blog;
 
 class CommentFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         $comment = new Comment();
         $comment->setUser('symfony');
