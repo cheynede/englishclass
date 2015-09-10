@@ -301,4 +301,5 @@ class Blog
     {
         return $this->comments;
     }
+
 }
