@@ -7,6 +7,7 @@ namespace Blogger\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Comment;
 use Blogger\BlogBundle\Form\CommentType;
+use Symfony\Component\BrowserKit\Response;
 
 class CommentController extends Controller
 {
@@ -17,7 +18,6 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->setBlog($blog);
         $form   = $this->createForm(new CommentType(), $comment);
-
         return $this->render('BloggerBlogBundle:Comment:form.html.twig', array(
             'comment' => $comment,
             'form'   => $form->createView()
