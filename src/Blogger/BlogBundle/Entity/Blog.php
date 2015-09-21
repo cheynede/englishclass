@@ -78,6 +78,10 @@ class Blog
      */
     private $updated;
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
     /**
      * Get id

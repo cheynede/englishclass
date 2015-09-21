@@ -19,8 +19,8 @@ class CommentController extends Controller
         $comment->setBlog($blog);
         $form   = $this->createForm(new CommentType(), $comment);
         return $this->render('BloggerBlogBundle:Comment:form.html.twig', array(
+            'form'   => $form->createView(),
             'comment' => $comment,
-            'form'   => $form->createView()
         ));
     }
 
