@@ -87,12 +87,16 @@
         </div>
     </header>
     <div class="container">
-        <section class="main-col">
-            {% block body %}{% endblock %}
-        </section>
-        <aside class="sidebar">
-            {% block sidebar %}{% endblock %}
-        </aside>
+        <div class="col-lg-8">
+            <section class="main-col">
+                {% block body %}{% endblock %}
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <aside class="sidebar">
+                    {% block sidebar %}{% endblock %}
+            </aside>
+        </div>
     </div>
     <hr>
     <footer>
