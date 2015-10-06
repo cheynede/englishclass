@@ -24,7 +24,7 @@ class Comment
     /**
      * @ORM\Column(type="string")
      */
-    protected $user;
+    protected $name;
 
     /**
      * @ORM\Column(type="text")
@@ -76,29 +76,6 @@ class Comment
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set user
-     *
-     * @param string $user
-     * @return Comment
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return string 
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**
@@ -218,11 +195,34 @@ class Comment
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $metadata->addPropertyConstraint('user', new NotBlank(array(
+        $metadata->addPropertyConstraint('name', new NotBlank(array(
             'message' => 'You must enter your name'
         )));
         $metadata->addPropertyConstraint('comment', new NotBlank(array(
             'message' => 'You must enter a comment'
         )));
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Comment
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

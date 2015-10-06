@@ -4,23 +4,31 @@
 {% block body %}
     {% for blog in blogs %}
         <div class="post-preview">
-            <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
-                <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id }) }}">
-                    <h2 class="post-title">
-                    {{ blog.title }}
-                    </h2>
-
-                   {# <img src="{{ asset(['images/', blog.image]|join) }}" />#}
-                    <h3 class="post-subtitle">
-                        {{ blog.blog(500) }}
-                    </h3>
-                </a>
-                <p class="post-meta">
-                    Posted by <span class="highlight">{{blog.author}}</span> at {{ blog.created|date('h:iA') }}
-                    Tags: <span class="highlight">{{ blog.tags }}</span>
-                </p>
+            <div class="date">
+                <time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time>
             </div>
-            <hr>
+            <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id , 'slug': blog.slug}) }}">
+                <h2 class="post-title">
+                {{ blog.title }}
+                </h2>
+
+               {# <img src="{{ asset(['images/', blog.image]|join) }}" />#}
+                <h3 class="post-subtitle">
+                    {{ blog.blog(500) }}
+                </h3>
+            </a>
+            <p class="post-meta">
+                Posted by <span class="highlight">{{blog.author}}</span> at {{ blog.created|date('h:iA') }}
+                Tags: <span class="highlight">{{ blog.tags }}</span>
+            </p>
+        </div>
+        <footer class="meta">
+            <p>Comments: <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}#comments">{{ blog.comments|length }}</a></p>
+            <p>Posted by <span class="highlight">{{ blog.author }}</span> at {{ blog.created|date('h:iA') }}</p>
+            <p>Tags: <span class="highlight">{{ blog.tags }}</span></p>
+        </footer>
+
+        <hr>
     {% else %}
         <p>There are no blog entries for EnglishClass</p>
     {% endfor %}

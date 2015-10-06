@@ -25,6 +25,11 @@ class Blog
     private $id;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -102,7 +107,7 @@ class Blog
     public function setTitle($title)
     {
         $this->title = $title;
-
+        $this->setSlug($this->title);
         return $this;
     }
 
@@ -304,6 +309,58 @@ class Blog
     public function getComments()
     {
         return $this->comments;
+    }
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Blog
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $this->slugify($slug);
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+
+    public function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        if (function_exists('iconv'))
+        {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('#[^-\w]+#', '', $text);
+
+        if (empty($text))
+        {
+            return 'n-a';
+        }
+
+        return $text;
     }
 
 }

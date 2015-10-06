@@ -2,6 +2,7 @@
 
 namespace Blogger\BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,6 +24,11 @@ class Blog
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
+    
     /**
      * @var string
      *
@@ -77,6 +83,10 @@ class Blog
      */
     private $updated;
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
     /**
      * Get id
@@ -300,4 +310,5 @@ class Blog
     {
         return $this->comments;
     }
+
 }

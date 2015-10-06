@@ -1,19 +1,19 @@
 {# src/Blogger/BlogBundle/Resources/public/views/Comment/form.html.twig #}
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <form action="{{ path('BloggerBlogBundle_comment_create', { 'blog_id' : comment.blog.id } ) }}" method="post" {{ form_enctype(form) }} class="blogger">
+    <form action="{{ path('BloggerBlogBundle_comment_create', { 'blog_id' : comment.blog.id } ) }}" method="POST" {{ form_enctype(form) }} class="blogger">
         {#{{ form_row(form) }}#}
-            {{ form_errors(form) }}
-            <div class="row control-group">
-                <div class="form-group col-xs-12 floating-label-form-group controls">
-                    {{ form_row(form.user, {'label':'Name','class': 'form-control', 'attr': {'placeholder':'Name'} }) }}
-                </div>
+        {{ form_errors(form) }}
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                {{ form_row(form.name, {'label':'Name','class': 'form-control', 'attr': {'placeholder':'Name'} }) }}
             </div>
-            <div class="row control-group">
-                <div class="form-group col-xs-12 floating-label-form-group controls">
-                    {{ form_row(form.comment, {'class': 'form-control', 'attr': {'placeholder':'Comment'} }) }}
-                </div>
+        </div>
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                {{ form_row(form.comment, {'class': 'form-control', 'attr': {'placeholder':'Comment'} }) }}
             </div>
-            {{ form_rest(form) }}
-            <input type="submit" value="Submit">
+        </div>
+        {{ form_rest(form) }}
+        <input type="submit" value="Submit">
     </form>
 </div>

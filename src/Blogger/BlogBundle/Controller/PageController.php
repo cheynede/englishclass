@@ -34,7 +34,7 @@ class PageController extends Controller
         if ($form->isValid()) {
             $message = \Swift_Message::newInstance()
                 ->setSubject('Contact enquiry from EnglishClass')
-                ->setFrom('cheynede@gmail.com') # ADRESSE MAIL DU SITE
+                ->setFrom($this->container->getParameter('blogger_blog.emails.admin_email')) # ADRESSE MAIL DU SITE
                 ->setTo($this->container->getParameter('blogger_blog.emails.contact_email'))
                 ->setBody($this->renderView('BloggerBlogBundle:Page:contactEmail.txt.twig', array('enquiry' => $oEnquiry)));
             $this->get('mailer')->send($message);
@@ -55,5 +55,26 @@ class PageController extends Controller
         ));
 
         return $this->render('BloggerBlogBundle:Page:contact.html.twig');
+    }
+
+    public function sidebarAction()
+    {
+        $em = $this->getDoctrine()
+            ->getEntityManager();
+
+        $tags = $em->getRepository('BloggerBlogBundle:Blog')
+            ->getTags();
+
+        $tagWeights = $em->getRepository('BloggerBlogBundle:Blog')
+            ->getTagWeights($tags);
+        $commentLimit   = $this->container
+            ->getParameter('blogger_blog.comments.latest_comment_limit');
+        $latestComments = $em->getRepository('BloggerBlogBundle:Comment')
+            ->getLatestComments($commentLimit);
+
+        return $this->render('BloggerBlogBundle:Page:sidebar.html.twig', array(
+            'latestComments' => $latestComments,
+            'tags' => $tagWeights
+        ));
     }
 }

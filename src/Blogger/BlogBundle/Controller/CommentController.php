@@ -35,10 +35,19 @@ class CommentController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            // TODO: Persist the comment entity
-
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+/*            $message = \Swift_Message::newInstance()
+                ->setSubject('adding comment from EnglishClass')
+                ->setFrom($this->container->getParameter('blogger_blog.emails.admin_email'))
+                ->setTo($this->container->getParameter('blogger_blog.emails.contact_email'))
+                ->setBody($this->renderView('BloggerBlogBundle:Comment:commentEmail.txt.twig', array('comment' => $comment)));
+            $this->get('mailer')->send($message);
+*/
             return $this->redirect($this->generateUrl('BloggerBlogBundle_blog_show', array(
-                    'id' => $comment->getBlog()->getId())) .
+                'id' => $comment->getBlog()->getId(),
+                'slug'=> $comment->getBlog()->getSlug())) .
                 '#comment-' . $comment->getId()
             );
         }

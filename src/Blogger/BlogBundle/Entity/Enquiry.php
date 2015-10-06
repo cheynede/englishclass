@@ -133,7 +133,5 @@ class Enquiry
             'message' => 'EnglishClass does not like invalid emails. Give me a real one!'
         )));
         $metadata->addPropertyConstraint('subject', new NotBlank());
-//        $metadata->addPropertyConstraint('subject', new MaxLength(50));
-//        $metadata->addPropertyConstraint('body', new MinLength(50));
     }
 }
